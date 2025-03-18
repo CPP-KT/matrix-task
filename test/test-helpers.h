@@ -4,6 +4,8 @@
 
 #include <gtest/gtest.h>
 
+namespace ct::test {
+
 struct Element {
   void* operator new[](size_t count) {
     allocations += count / sizeof(Element);
@@ -103,3 +105,5 @@ void expect_equal(const Matrix<T>& expected, const Matrix<T>& actual) {
     }
   }
 }
+
+} // namespace ct::test

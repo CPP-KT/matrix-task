@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace {
+namespace ct::test {
 
 class ConstructorsTest : public ::testing::Test {
 protected:
@@ -11,8 +11,6 @@ protected:
     Element::reset_allocations();
   }
 };
-
-} // namespace
 
 TEST_F(ConstructorsTest, default_ctor) {
   Matrix<Element> a;
@@ -184,3 +182,5 @@ TEST_F(ConstructorsTest, copy_assignment_empty) {
 
   expect_allocations(SIZE_B);
 }
+
+} // namespace ct::test

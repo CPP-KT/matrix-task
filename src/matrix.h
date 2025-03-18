@@ -2,6 +2,8 @@
 
 #include <cstddef>
 
+namespace ct {
+
 template <class T>
 class Matrix {
 public:
@@ -86,3 +88,5 @@ public:
   friend Matrix operator*(const Matrix& left, ConstReference right);
   friend Matrix operator*(ConstReference left, const Matrix& right);
 };
+
+} // namespace ct

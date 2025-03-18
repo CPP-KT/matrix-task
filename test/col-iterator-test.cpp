@@ -8,11 +8,11 @@
 #include <iterator>
 #include <utility>
 
-namespace {
+namespace ct::test {
 
 class ColIteratorTest : public ::testing::Test {
 protected:
-  using Matrix = ::Matrix<Element>;
+  using Matrix = Matrix<Element>;
 
   Matrix m = Matrix({
       {1, 2, 3},
@@ -21,6 +21,8 @@ protected:
       {14, 15, 16},
   });
 };
+
+namespace {
 
 template <class It>
 It advance(It it, std::iter_difference_t<It> n) {
@@ -245,3 +247,5 @@ TEST_F(ColIteratorTest, compare) {
   EXPECT_LT(it2, end);
   EXPECT_GT(end, it2);
 }
+
+} // namespace ct::test

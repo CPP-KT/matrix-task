@@ -3,6 +3,8 @@
 
 #include <gtest/gtest.h>
 
+namespace ct::test {
+
 #define EXPECT_TRAIT(...) EXPECT_TRUE((__VA_ARGS__))
 
 TEST(TraitsTest, member_types) {
@@ -64,3 +66,5 @@ TEST(TraitsTest, iterator_triviality) {
   EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::ColIterator>);
   EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::ConstColIterator>);
 }
+
+} // namespace ct::test

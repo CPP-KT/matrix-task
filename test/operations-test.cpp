@@ -5,7 +5,7 @@
 
 #include <numeric>
 
-namespace {
+namespace ct::test {
 
 class OperationsTest : public ::testing::Test {
 protected:
@@ -13,8 +13,6 @@ protected:
     Element::reset_allocations();
   }
 };
-
-} // namespace
 
 TEST_F(OperationsTest, element_access) {
   Matrix<Element> a(2, 3);
@@ -462,3 +460,5 @@ TEST_F(OperationsTest, mul_scalar_return_value) {
 
   expect_allocations(a.size() + b.size());
 }
+
+} // namespace ct::test

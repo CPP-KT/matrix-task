@@ -3,55 +3,55 @@
 #include <cstddef>
 
 template <class T>
-class matrix {
+class Matrix {
 public:
-  using value_type = T;
+  using ValueType = T;
 
-  using reference = T&;
-  using const_reference = const T&;
+  using Reference = T&;
+  using ConstReference = const T&;
 
-  using pointer = T*;
-  using const_pointer = const T*;
+  using Pointer = T*;
+  using ConstPointer = const T*;
 
-  using iterator = void;
-  using const_iterator = void;
+  using Iterator = void;
+  using ConstIterator = void;
 
-  using row_iterator = void;
-  using const_row_iterator = void;
+  using RowIterator = void;
+  using ConstRowIterator = void;
 
-  using col_iterator = void;
-  using const_col_iterator = void;
+  using ColIterator = void;
+  using ConstColIterator = void;
 
 public:
-  matrix();
+  Matrix();
 
-  matrix(size_t rows, size_t cols);
+  Matrix(size_t rows, size_t cols);
 
-  template <size_t Rows, size_t Cols>
-  matrix(const T (&init)[Rows][Cols]);
+  template <size_t ROWS, size_t COLS>
+  Matrix(const T (&init)[ROWS][COLS]);
 
-  matrix(const matrix& other);
+  Matrix(const Matrix& other);
 
-  matrix& operator=(const matrix& other);
+  Matrix& operator=(const Matrix& other);
 
-  ~matrix();
+  ~Matrix();
 
   // Iterators
 
-  iterator begin();
-  const_iterator begin() const;
-  iterator end();
-  const_iterator end() const;
+  Iterator begin();
+  ConstIterator begin() const;
+  Iterator end();
+  ConstIterator end() const;
 
-  row_iterator row_begin(size_t row);
-  const_row_iterator row_begin(size_t row) const;
-  row_iterator row_end(size_t row);
-  const_row_iterator row_end(size_t row) const;
+  RowIterator row_begin(size_t row);
+  ConstRowIterator row_begin(size_t row) const;
+  RowIterator row_end(size_t row);
+  ConstRowIterator row_end(size_t row) const;
 
-  col_iterator col_begin(size_t col);
-  const_col_iterator col_begin(size_t col) const;
-  col_iterator col_end(size_t col);
-  const_col_iterator col_end(size_t col) const;
+  ColIterator col_begin(size_t col);
+  ConstColIterator col_begin(size_t col) const;
+  ColIterator col_end(size_t col);
+  ConstColIterator col_end(size_t col) const;
 
   // Size
 
@@ -62,27 +62,27 @@ public:
 
   // Elements access
 
-  reference operator()(size_t row, size_t col);
-  const_reference operator()(size_t row, size_t col) const;
+  Reference operator()(size_t row, size_t col);
+  ConstReference operator()(size_t row, size_t col) const;
 
-  pointer data();
-  const_pointer data() const;
+  Pointer data();
+  ConstPointer data() const;
 
   // Comparison
 
-  friend bool operator==(const matrix& left, const matrix& right);
-  friend bool operator!=(const matrix& left, const matrix& right);
+  friend bool operator==(const Matrix& left, const Matrix& right);
+  friend bool operator!=(const Matrix& left, const Matrix& right);
 
   // Arithmetic operations
 
-  matrix& operator+=(const matrix& other);
-  matrix& operator-=(const matrix& other);
-  matrix& operator*=(const matrix& other);
-  matrix& operator*=(const_reference factor);
+  Matrix& operator+=(const Matrix& other);
+  Matrix& operator-=(const Matrix& other);
+  Matrix& operator*=(const Matrix& other);
+  Matrix& operator*=(ConstReference factor);
 
-  friend matrix operator+(const matrix& left, const matrix& right);
-  friend matrix operator-(const matrix& left, const matrix& right);
-  friend matrix operator*(const matrix& left, const matrix& right);
-  friend matrix operator*(const matrix& left, const_reference right);
-  friend matrix operator*(const_reference left, const matrix& right);
+  friend Matrix operator+(const Matrix& left, const Matrix& right);
+  friend Matrix operator-(const Matrix& left, const Matrix& right);
+  friend Matrix operator*(const Matrix& left, const Matrix& right);
+  friend Matrix operator*(const Matrix& left, ConstReference right);
+  friend Matrix operator*(ConstReference left, const Matrix& right);
 };

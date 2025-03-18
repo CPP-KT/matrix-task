@@ -5,62 +5,62 @@
 
 #define EXPECT_TRAIT(...) EXPECT_TRUE((__VA_ARGS__))
 
-TEST(traits_test, member_types) {
-  EXPECT_TRAIT(std::is_same_v<element, matrix<element>::value_type>);
+TEST(TraitsTest, member_types) {
+  EXPECT_TRAIT(std::is_same_v<Element, Matrix<Element>::ValueType>);
 
-  EXPECT_TRAIT(std::is_same_v<element&, matrix<element>::reference>);
-  EXPECT_TRAIT(std::is_same_v<const element&, matrix<element>::const_reference>);
+  EXPECT_TRAIT(std::is_same_v<Element&, Matrix<Element>::Reference>);
+  EXPECT_TRAIT(std::is_same_v<const Element&, Matrix<Element>::ConstReference>);
 
-  EXPECT_TRAIT(std::is_same_v<element*, matrix<element>::pointer>);
-  EXPECT_TRAIT(std::is_same_v<const element*, matrix<element>::const_pointer>);
+  EXPECT_TRAIT(std::is_same_v<Element*, Matrix<Element>::Pointer>);
+  EXPECT_TRAIT(std::is_same_v<const Element*, Matrix<Element>::ConstPointer>);
 
-  EXPECT_TRAIT(std::is_same_v<element*, matrix<element>::iterator>);
-  EXPECT_TRAIT(std::is_same_v<const element*, matrix<element>::const_iterator>);
+  EXPECT_TRAIT(std::is_same_v<Element*, Matrix<Element>::Iterator>);
+  EXPECT_TRAIT(std::is_same_v<const Element*, Matrix<Element>::ConstIterator>);
 
-  EXPECT_TRAIT(std::is_same_v<element*, matrix<element>::row_iterator>);
-  EXPECT_TRAIT(std::is_same_v<const element*, matrix<element>::const_row_iterator>);
+  EXPECT_TRAIT(std::is_same_v<Element*, Matrix<Element>::RowIterator>);
+  EXPECT_TRAIT(std::is_same_v<const Element*, Matrix<Element>::ConstRowIterator>);
 }
 
-TEST(traits_test, iterator_categories) {
-  EXPECT_TRAIT(std::contiguous_iterator<matrix<element>::iterator>);
-  EXPECT_TRAIT(std::contiguous_iterator<matrix<element>::const_iterator>);
+TEST(TraitsTest, iterator_categories) {
+  EXPECT_TRAIT(std::contiguous_iterator<Matrix<Element>::Iterator>);
+  EXPECT_TRAIT(std::contiguous_iterator<Matrix<Element>::ConstIterator>);
 
-  EXPECT_TRAIT(std::contiguous_iterator<matrix<element>::row_iterator>);
-  EXPECT_TRAIT(std::contiguous_iterator<matrix<element>::const_row_iterator>);
+  EXPECT_TRAIT(std::contiguous_iterator<Matrix<Element>::RowIterator>);
+  EXPECT_TRAIT(std::contiguous_iterator<Matrix<Element>::ConstRowIterator>);
 
-  EXPECT_TRAIT(std::random_access_iterator<matrix<element>::col_iterator>);
-  EXPECT_TRAIT(std::random_access_iterator<matrix<element>::const_col_iterator>);
+  EXPECT_TRAIT(std::random_access_iterator<Matrix<Element>::ColIterator>);
+  EXPECT_TRAIT(std::random_access_iterator<Matrix<Element>::ConstColIterator>);
 }
 
-TEST(traits_test, range_categories) {
-  EXPECT_TRAIT(std::ranges::contiguous_range<matrix<element>>);
-  EXPECT_TRAIT(std::ranges::contiguous_range<const matrix<element>>);
+TEST(TraitsTest, range_categories) {
+  EXPECT_TRAIT(std::ranges::contiguous_range<Matrix<Element>>);
+  EXPECT_TRAIT(std::ranges::contiguous_range<const Matrix<Element>>);
 }
 
-TEST(traits_test, col_iterator_member_types) {
-  using col_iterator = matrix<element>::col_iterator;
-  using const_col_iterator = matrix<element>::const_col_iterator;
+TEST(TraitsTest, col_iterator_member_types) {
+  using ColIteratorTraits = std::iterator_traits<Matrix<Element>::ColIterator>;
+  using ConstColIteratorTraits = std::iterator_traits<Matrix<Element>::ConstColIterator>;
 
-  EXPECT_TRAIT(std::is_same_v<element, col_iterator::value_type>);
-  EXPECT_TRAIT(std::is_same_v<element&, col_iterator::reference>);
-  EXPECT_TRAIT(std::is_same_v<element*, col_iterator::pointer>);
-  EXPECT_TRAIT(std::is_same_v<std::ptrdiff_t, col_iterator::difference_type>);
-  EXPECT_TRAIT(std::is_same_v<std::random_access_iterator_tag, col_iterator::iterator_category>);
+  EXPECT_TRAIT(std::is_same_v<Element, ColIteratorTraits::value_type>);
+  EXPECT_TRAIT(std::is_same_v<Element&, ColIteratorTraits::reference>);
+  EXPECT_TRAIT(std::is_same_v<Element*, ColIteratorTraits::pointer>);
+  EXPECT_TRAIT(std::is_same_v<std::ptrdiff_t, ColIteratorTraits::difference_type>);
+  EXPECT_TRAIT(std::is_same_v<std::random_access_iterator_tag, ColIteratorTraits::iterator_category>);
 
-  EXPECT_TRAIT(std::is_same_v<element, const_col_iterator::value_type>);
-  EXPECT_TRAIT(std::is_same_v<const element&, const_col_iterator::reference>);
-  EXPECT_TRAIT(std::is_same_v<const element*, const_col_iterator::pointer>);
-  EXPECT_TRAIT(std::is_same_v<std::ptrdiff_t, const_col_iterator::difference_type>);
-  EXPECT_TRAIT(std::is_same_v<std::random_access_iterator_tag, const_col_iterator::iterator_category>);
+  EXPECT_TRAIT(std::is_same_v<Element, ConstColIteratorTraits::value_type>);
+  EXPECT_TRAIT(std::is_same_v<const Element&, ConstColIteratorTraits::reference>);
+  EXPECT_TRAIT(std::is_same_v<const Element*, ConstColIteratorTraits::pointer>);
+  EXPECT_TRAIT(std::is_same_v<std::ptrdiff_t, ConstColIteratorTraits::difference_type>);
+  EXPECT_TRAIT(std::is_same_v<std::random_access_iterator_tag, ConstColIteratorTraits::iterator_category>);
 }
 
-TEST(traits_test, iterator_triviality) {
-  EXPECT_TRAIT(std::is_trivial_v<matrix<element>::iterator>);
-  EXPECT_TRAIT(std::is_trivial_v<matrix<element>::const_iterator>);
+TEST(TraitsTest, iterator_triviality) {
+  EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::Iterator>);
+  EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::ConstIterator>);
 
-  EXPECT_TRAIT(std::is_trivial_v<matrix<element>::row_iterator>);
-  EXPECT_TRAIT(std::is_trivial_v<matrix<element>::const_row_iterator>);
+  EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::RowIterator>);
+  EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::ConstRowIterator>);
 
-  EXPECT_TRAIT(std::is_trivial_v<matrix<element>::col_iterator>);
-  EXPECT_TRAIT(std::is_trivial_v<matrix<element>::const_col_iterator>);
+  EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::ColIterator>);
+  EXPECT_TRAIT(std::is_trivial_v<Matrix<Element>::ConstColIterator>);
 }

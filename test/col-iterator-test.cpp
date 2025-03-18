@@ -10,11 +10,11 @@
 
 namespace {
 
-class col_iterator_test : public ::testing::Test {
+class ColIteratorTest : public ::testing::Test {
 protected:
-  using matrix = ::matrix<element>;
+  using Matrix = ::Matrix<Element>;
 
-  matrix m = matrix({
+  Matrix m = Matrix({
       {1, 2, 3},
       {4, 5, 6},
       {11, 12, 13},
@@ -41,36 +41,36 @@ std::ptrdiff_t as_diff(std::size_t n) {
 
 } // namespace
 
-TEST_F(col_iterator_test, non_const_to_const) {
-  matrix::col_iterator begin = m.col_begin(1);
-  matrix::const_col_iterator cbegin = begin;
+TEST_F(ColIteratorTest, non_const_to_const) {
+  Matrix::ColIterator begin = m.col_begin(1);
+  Matrix::ConstColIterator cbegin = begin;
   EXPECT_EQ(std::as_const(m).col_begin(1), cbegin);
   EXPECT_EQ(begin, cbegin);
 
-  matrix::col_iterator end = m.col_end(1);
-  matrix::const_col_iterator cend = end;
+  Matrix::ColIterator end = m.col_end(1);
+  Matrix::ConstColIterator cend = end;
   EXPECT_EQ(std::as_const(m).col_end(1), cend);
   EXPECT_EQ(end, cend);
 }
 
-TEST_F(col_iterator_test, copy_ctor) {
-  matrix::col_iterator it1 = m.col_begin(1);
-  matrix::col_iterator it2 = it1;
+TEST_F(ColIteratorTest, copy_ctor) {
+  Matrix::ColIterator it1 = m.col_begin(1);
+  Matrix::ColIterator it2 = it1;
   EXPECT_EQ(it1, it2);
 
   ++it2;
   EXPECT_NE(it1, it2);
 }
 
-TEST_F(col_iterator_test, default_construct) {
-  matrix::col_iterator it;
+TEST_F(ColIteratorTest, default_construct) {
+  Matrix::ColIterator it;
   it = m.col_begin(1);
-  matrix::const_col_iterator cit;
+  Matrix::ConstColIterator cit;
   cit = m.col_begin(1);
   EXPECT_EQ(it, cit);
 }
 
-TEST_F(col_iterator_test, indirection) {
+TEST_F(ColIteratorTest, indirection) {
   auto it = m.col_begin(1);
   auto end = std::as_const(m).col_end(1);
 
@@ -82,10 +82,10 @@ TEST_F(col_iterator_test, indirection) {
   }
   EXPECT_EQ(it, end);
 
-  std::for_each(m.col_begin(1), m.col_end(1), [](element x) { EXPECT_EQ(42, x); });
+  std::for_each(m.col_begin(1), m.col_end(1), [](Element x) { EXPECT_EQ(42, x); });
 }
 
-TEST_F(col_iterator_test, member_access) {
+TEST_F(ColIteratorTest, member_access) {
   auto it = m.col_begin(1);
   auto end = std::as_const(m).col_end(1);
 
@@ -97,10 +97,10 @@ TEST_F(col_iterator_test, member_access) {
   }
   EXPECT_EQ(it, end);
 
-  std::for_each(m.col_begin(1), m.col_end(1), [](element x) { EXPECT_EQ(42, x); });
+  std::for_each(m.col_begin(1), m.col_end(1), [](Element x) { EXPECT_EQ(42, x); });
 }
 
-TEST_F(col_iterator_test, increment) {
+TEST_F(ColIteratorTest, increment) {
   auto it = std::as_const(m).col_begin(1);
 
   EXPECT_EQ(&m(1, 1), ++it);
@@ -110,7 +110,7 @@ TEST_F(col_iterator_test, increment) {
   EXPECT_EQ(&m(2, 1), it);
 }
 
-TEST_F(col_iterator_test, decrement) {
+TEST_F(ColIteratorTest, decrement) {
   auto it = std::as_const(m).col_end(1);
 
   EXPECT_EQ(&m(3, 1), --it);
@@ -120,7 +120,7 @@ TEST_F(col_iterator_test, decrement) {
   EXPECT_EQ(&m(2, 1), it);
 }
 
-TEST_F(col_iterator_test, add_diff) {
+TEST_F(ColIteratorTest, add_diff) {
   auto it = std::as_const(m).col_begin(1);
 
   EXPECT_EQ(m.col_end(1), it + m.rows());
@@ -135,7 +135,7 @@ TEST_F(col_iterator_test, add_diff) {
   }
 }
 
-TEST_F(col_iterator_test, sub_diff) {
+TEST_F(ColIteratorTest, sub_diff) {
   auto it = std::as_const(m).col_end(1);
 
   EXPECT_EQ(m.col_begin(1), it - m.rows());
@@ -149,7 +149,7 @@ TEST_F(col_iterator_test, sub_diff) {
   }
 }
 
-TEST_F(col_iterator_test, add_neg_diff) {
+TEST_F(ColIteratorTest, add_neg_diff) {
   auto it = std::as_const(m).col_end(1);
 
   EXPECT_EQ(m.col_begin(1), it + -as_diff(m.rows()));
@@ -164,7 +164,7 @@ TEST_F(col_iterator_test, add_neg_diff) {
   }
 }
 
-TEST_F(col_iterator_test, sub_neg_diff) {
+TEST_F(ColIteratorTest, sub_neg_diff) {
   auto it = std::as_const(m).col_begin(1);
 
   EXPECT_EQ(m.col_end(1), it - -as_diff(m.rows()));
@@ -178,7 +178,7 @@ TEST_F(col_iterator_test, sub_neg_diff) {
   }
 }
 
-TEST_F(col_iterator_test, iter_diff) {
+TEST_F(ColIteratorTest, iter_diff) {
   auto it = std::as_const(m).col_begin(1);
   auto end = m.col_end(1);
 
@@ -194,7 +194,7 @@ TEST_F(col_iterator_test, iter_diff) {
   EXPECT_EQ(-as_diff(m.rows() - 2), it - end);
 }
 
-TEST_F(col_iterator_test, subscript) {
+TEST_F(ColIteratorTest, subscript) {
   auto it = std::as_const(m).col_begin(1);
 
   EXPECT_EQ(m(0, 1), it[0]);
@@ -214,7 +214,7 @@ TEST_F(col_iterator_test, subscript) {
   EXPECT_EQ(&m(2, 1), &it[1]);
 }
 
-TEST_F(col_iterator_test, compare) {
+TEST_F(ColIteratorTest, compare) {
   auto it1 = std::as_const(m).col_begin(1);
   auto it2 = it1;
 

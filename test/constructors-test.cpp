@@ -5,28 +5,28 @@
 
 namespace {
 
-class ctors_test : public ::testing::Test {
+class ConstructorsTest : public ::testing::Test {
 protected:
   void SetUp() override {
-    element::reset_allocations();
+    Element::reset_allocations();
   }
 };
 
 } // namespace
 
-TEST_F(ctors_test, default_ctor) {
-  matrix<element> a;
+TEST_F(ConstructorsTest, default_ctor) {
+  Matrix<Element> a;
 
   expect_empty(a);
   expect_allocations(0);
 }
 
-TEST_F(ctors_test, zeros_ctor) {
+TEST_F(ConstructorsTest, zeros_ctor) {
   constexpr size_t ROWS = 40;
   constexpr size_t COLS = 100;
   constexpr size_t SIZE = ROWS * COLS;
 
-  matrix<element> a(ROWS, COLS);
+  Matrix<Element> a(ROWS, COLS);
 
   EXPECT_EQ(ROWS, a.rows());
   EXPECT_EQ(COLS, a.cols());
@@ -43,25 +43,25 @@ TEST_F(ctors_test, zeros_ctor) {
   expect_allocations(SIZE);
 }
 
-TEST_F(ctors_test, zeros_ctor_empty) {
-  matrix<element> a(0, 0);
+TEST_F(ConstructorsTest, zeros_ctor_empty) {
+  Matrix<Element> a(0, 0);
 
   expect_empty(a);
   expect_allocations(0);
 }
 
-TEST_F(ctors_test, zeros_ctor_weird) {
-  matrix<element> a(10, 0);
+TEST_F(ConstructorsTest, zeros_ctor_weird) {
+  Matrix<Element> a(10, 0);
   expect_empty(a);
 
-  matrix<element> b(0, 10);
+  Matrix<Element> b(0, 10);
   expect_empty(b);
 
   expect_allocations(0);
 }
 
-TEST_F(ctors_test, init_ctor) {
-  matrix<element> a({
+TEST_F(ConstructorsTest, init_ctor) {
+  Matrix<Element> a({
       {10, 20, 30},
       {40, 50, 60},
   });
@@ -82,12 +82,12 @@ TEST_F(ctors_test, init_ctor) {
   expect_allocations(6);
 }
 
-TEST_F(ctors_test, copy_ctor) {
+TEST_F(ConstructorsTest, copy_ctor) {
   constexpr size_t ROWS = 40;
   constexpr size_t COLS = 100;
   constexpr size_t SIZE = ROWS * COLS;
 
-  matrix<element> a(ROWS, COLS);
+  Matrix<Element> a(ROWS, COLS);
 
   expect_allocations(SIZE);
 
@@ -95,16 +95,16 @@ TEST_F(ctors_test, copy_ctor) {
 
   expect_allocations(SIZE);
 
-  matrix<element> b = a;
+  Matrix<Element> b = a;
 
   expect_equal(a, b);
 
   expect_allocations(SIZE * 2);
 }
 
-TEST_F(ctors_test, copy_ctor_empty) {
-  matrix<element> a;
-  matrix<element> b = a;
+TEST_F(ConstructorsTest, copy_ctor_empty) {
+  Matrix<Element> a;
+  Matrix<Element> b = a;
 
   expect_empty(a);
   expect_empty(b);
@@ -112,7 +112,7 @@ TEST_F(ctors_test, copy_ctor_empty) {
   expect_allocations(0);
 }
 
-TEST_F(ctors_test, copy_assignment) {
+TEST_F(ConstructorsTest, copy_assignment) {
   constexpr size_t ROWS_A = 40;
   constexpr size_t COLS_A = 100;
   constexpr size_t SIZE_A = ROWS_A * COLS_A;
@@ -121,10 +121,10 @@ TEST_F(ctors_test, copy_assignment) {
   constexpr size_t COLS_B = 15;
   constexpr size_t SIZE_B = ROWS_B * COLS_B;
 
-  matrix<element> b(ROWS_B, COLS_B);
+  Matrix<Element> b(ROWS_B, COLS_B);
 
   {
-    matrix<element> a(ROWS_A, COLS_A);
+    Matrix<Element> a(ROWS_A, COLS_A);
 
     expect_allocations(SIZE_A + SIZE_B);
 
@@ -146,12 +146,12 @@ TEST_F(ctors_test, copy_assignment) {
   }
 }
 
-TEST_F(ctors_test, self_copy_assignment) {
+TEST_F(ConstructorsTest, self_copy_assignment) {
   constexpr size_t ROWS = 40;
   constexpr size_t COLS = 100;
   constexpr size_t SIZE = ROWS * COLS;
 
-  matrix<element> a(ROWS, COLS);
+  Matrix<Element> a(ROWS, COLS);
 
   expect_allocations(SIZE);
 
@@ -170,13 +170,13 @@ TEST_F(ctors_test, self_copy_assignment) {
   }
 }
 
-TEST_F(ctors_test, copy_assignment_empty) {
+TEST_F(ConstructorsTest, copy_assignment_empty) {
   constexpr size_t ROWS_B = 40;
   constexpr size_t COLS_B = 100;
   constexpr size_t SIZE_B = ROWS_B * COLS_B;
 
-  matrix<element> a;
-  matrix<element> b(ROWS_B, COLS_B);
+  Matrix<Element> a;
+  Matrix<Element> b(ROWS_B, COLS_B);
   b = a;
 
   expect_empty(a);

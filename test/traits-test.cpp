@@ -37,6 +37,12 @@ TEST(TraitsTest, iterator_categories) {
 TEST(TraitsTest, range_categories) {
   EXPECT_TRAIT(std::ranges::contiguous_range<Matrix<Element>>);
   EXPECT_TRAIT(std::ranges::contiguous_range<const Matrix<Element>>);
+
+  EXPECT_TRAIT(std::ranges::contiguous_range<Matrix<Element>::RowView>);
+  EXPECT_TRAIT(std::ranges::contiguous_range<Matrix<Element>::ConstRowView>);
+
+  EXPECT_TRAIT(std::ranges::random_access_range<Matrix<Element>::ColView>);
+  EXPECT_TRAIT(std::ranges::random_access_range<Matrix<Element>::ConstColView>);
 }
 
 TEST(TraitsTest, col_iterator_member_types) {

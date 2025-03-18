@@ -24,6 +24,12 @@ public:
   using ColIterator = void;
   using ConstColIterator = void;
 
+  using RowView = void;
+  using ConstRowView = void;
+
+  using ColView = void;
+  using ConstColView = void;
+
 public:
   Matrix();
 
@@ -54,6 +60,14 @@ public:
   ConstColIterator col_begin(size_t col) const;
   ColIterator col_end(size_t col);
   ConstColIterator col_end(size_t col) const;
+
+  // Views
+
+  RowView row(size_t row);
+  ConstRowView row(size_t row) const;
+
+  ColView col(size_t col);
+  ConstColView col(size_t col) const;
 
   // Size
 

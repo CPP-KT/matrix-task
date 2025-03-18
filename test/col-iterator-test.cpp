@@ -24,7 +24,7 @@ protected:
 
 namespace {
 
-template <class It>
+template <typename It>
 It advance(It it, std::iter_difference_t<It> n) {
   while (n > 0) {
     --n;

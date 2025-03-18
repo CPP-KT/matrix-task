@@ -4,7 +4,7 @@
 
 namespace ct {
 
-template <class T>
+template <typename T>
 class Matrix {
 public:
   using ValueType = T;

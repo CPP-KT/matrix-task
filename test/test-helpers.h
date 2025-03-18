@@ -73,7 +73,7 @@ inline size_t elem(size_t i, size_t j) {
   return i * 101 + j * 7;
 }
 
-template <class T>
+template <typename T>
 void fill(Matrix<T>& a) {
   for (size_t i = 0; i < a.rows(); ++i) {
     for (size_t j = 0; j < a.cols(); ++j) {
@@ -82,7 +82,7 @@ void fill(Matrix<T>& a) {
   }
 }
 
-template <class T>
+template <typename T>
 void expect_empty(const Matrix<T>& m) {
   EXPECT_EQ(0, m.rows());
   EXPECT_EQ(0, m.cols());
@@ -91,7 +91,7 @@ void expect_empty(const Matrix<T>& m) {
   EXPECT_EQ(nullptr, m.data());
 }
 
-template <class T>
+template <typename T>
 void expect_equal(const Matrix<T>& expected, const Matrix<T>& actual) {
   EXPECT_EQ(expected.rows(), actual.rows());
   EXPECT_EQ(expected.cols(), actual.cols());

@@ -15,8 +15,8 @@ protected:
   using matrix = ::matrix<element>;
 
   matrix m = matrix({
-      { 1,  2,  3},
-      { 4,  5,  6},
+      {1, 2, 3},
+      {4, 5, 6},
       {11, 12, 13},
       {14, 15, 16},
   });
@@ -125,7 +125,7 @@ TEST_F(col_iterator_test, add_diff) {
 
   EXPECT_EQ(m.col_end(1), it + m.rows());
 
-  for (std::ptrdiff_t i = 0; i <= m.rows(); ++i) {
+  for (std::ptrdiff_t i = 0; i <= as_diff(m.rows()); ++i) {
     EXPECT_EQ(advance(it, i), it + i);
     EXPECT_EQ(advance(it, i), i + it);
 
@@ -140,7 +140,7 @@ TEST_F(col_iterator_test, sub_diff) {
 
   EXPECT_EQ(m.col_begin(1), it - m.rows());
 
-  for (std::ptrdiff_t i = 0; i <= m.rows(); ++i) {
+  for (std::ptrdiff_t i = 0; i <= as_diff(m.rows()); ++i) {
     EXPECT_EQ(advance(it, -i), it - i);
 
     auto it2 = it;
@@ -154,7 +154,7 @@ TEST_F(col_iterator_test, add_neg_diff) {
 
   EXPECT_EQ(m.col_begin(1), it + -as_diff(m.rows()));
 
-  for (std::ptrdiff_t i = 0; i <= m.rows(); ++i) {
+  for (std::ptrdiff_t i = 0; i <= as_diff(m.rows()); ++i) {
     EXPECT_EQ(advance(it, -i), it + -i);
     EXPECT_EQ(advance(it, -i), -i + it);
 
@@ -169,7 +169,7 @@ TEST_F(col_iterator_test, sub_neg_diff) {
 
   EXPECT_EQ(m.col_end(1), it - -as_diff(m.rows()));
 
-  for (std::ptrdiff_t i = 0; i <= m.rows(); ++i) {
+  for (std::ptrdiff_t i = 0; i <= as_diff(m.rows()); ++i) {
     EXPECT_EQ(advance(it, i), it - -i);
 
     auto it2 = it;

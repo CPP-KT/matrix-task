@@ -12,9 +12,9 @@ namespace ct::test {
 
 class ColIteratorTest : public ::testing::Test {
 protected:
-  using Matrix = Matrix<Element>;
+  using EMatrix = Matrix<Element>;
 
-  Matrix m = Matrix({
+  EMatrix m = EMatrix({
       {1, 2, 3},
       {4, 5, 6},
       {11, 12, 13},
@@ -44,20 +44,20 @@ std::ptrdiff_t as_diff(std::size_t n) {
 } // namespace
 
 TEST_F(ColIteratorTest, non_const_to_const) {
-  Matrix::ColIterator begin = m.col_begin(1);
-  Matrix::ConstColIterator cbegin = begin;
+  EMatrix::ColIterator begin = m.col_begin(1);
+  EMatrix::ConstColIterator cbegin = begin;
   EXPECT_EQ(std::as_const(m).col_begin(1), cbegin);
   EXPECT_EQ(begin, cbegin);
 
-  Matrix::ColIterator end = m.col_end(1);
-  Matrix::ConstColIterator cend = end;
+  EMatrix::ColIterator end = m.col_end(1);
+  EMatrix::ConstColIterator cend = end;
   EXPECT_EQ(std::as_const(m).col_end(1), cend);
   EXPECT_EQ(end, cend);
 }
 
 TEST_F(ColIteratorTest, copy_ctor) {
-  Matrix::ColIterator it1 = m.col_begin(1);
-  Matrix::ColIterator it2 = it1;
+  EMatrix::ColIterator it1 = m.col_begin(1);
+  EMatrix::ColIterator it2 = it1;
   EXPECT_EQ(it1, it2);
 
   ++it2;
@@ -65,9 +65,9 @@ TEST_F(ColIteratorTest, copy_ctor) {
 }
 
 TEST_F(ColIteratorTest, default_construct) {
-  Matrix::ColIterator it;
+  EMatrix::ColIterator it;
   it = m.col_begin(1);
-  Matrix::ConstColIterator cit;
+  EMatrix::ConstColIterator cit;
   cit = m.col_begin(1);
   EXPECT_EQ(it, cit);
 }
